@@ -1,3 +1,4 @@
+// src/components/Footer.jsx
 import React from 'react';
 import '../index.css';
 
@@ -5,12 +6,14 @@ const Footer = () => {
   return (
     <footer className="main-footer">
       <div className="footer-container">
-
+        
+        {/* Left Corner: Branding Only (Logo Image Removed) */}
         <div className="footer-left">
-          <h2>Anime<span>Hub</span></h2>
+          <div className="logo">Anime<span>Hub</span></div>
           <p>Your ultimate anime sanctuary.</p>
         </div>
 
+        {/* Right Corner: Social Icons */}
         <div className="footer-right">
           <h3>Stay Connected</h3>
           <div className="social-icons">
@@ -22,6 +25,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
+
       </div>
       
       <div className="footer-bottom">

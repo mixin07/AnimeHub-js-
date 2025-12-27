@@ -9,6 +9,7 @@
   --accent-glow: rgba(83, 109, 254, 0.3);
   --text-main: #ffffff;
   --text-dim: #94a3b8;
+  --danger: #ff4757;
 }
 
 body {
@@ -49,8 +50,28 @@ body {
   align-items: center;
 }
 
-.logo { font-size: 1.6rem; font-weight: 800; cursor: pointer; }
-.logo span { color: var(--accent-blue); }
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+  font-size: 1.6rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.nav-logo-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
+.logo span {
+  color: var(--accent-blue);
+  margin-left: -2px;
+}
 
 .nav-links { display: flex; gap: 20px; align-items: center; }
 
@@ -81,6 +102,9 @@ body {
   cursor: pointer;
   font-weight: 600;
   transition: 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .nav-btn.active { 
@@ -88,11 +112,16 @@ body {
   box-shadow: 0 0 15px var(--accent-glow); 
 }
 
+.nav-btn:hover:not(.active) {
+  background: #2d3748;
+}
+
 /* --- Section Headers --- */
 .section-header {
   text-align: left;
   margin-top: 50px;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 .section-header h1 {
@@ -102,20 +131,15 @@ body {
   letter-spacing: -1.5px;
 }
 
-.section-header p {
-  color: var(--text-dim);
-  margin-top: 8px;
-}
-
-/* --- Grid System --- */
+/* --- Anime Grid --- */
 .anime-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
+  grid-template-columns: repeat(4, 1fr); 
+  gap: 30px;
   margin-top: 20px;
+  width: 100%;
 }
 
-/* --- Anime Card --- */
 .anime-card {
   background: var(--card-bg);
   border-radius: 16px;
@@ -123,6 +147,9 @@ body {
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
   border: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .anime-card:hover {
@@ -143,30 +170,6 @@ body {
   object-fit: cover;
 }
 
-/* --- Heart Button --- */
-.fav-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
-  border: none;
-  border-radius: 50%;
-  width: 38px;
-  height: 38px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 10;
-  transition: 0.2s ease;
-}
-
-.fav-btn:hover {
-  transform: scale(1.15);
-  background: rgba(0, 0, 0, 0.8);
-}
-
 .rating-badge {
   position: absolute;
   bottom: 12px;
@@ -176,33 +179,82 @@ body {
   border-radius: 6px;
   font-weight: 800;
   font-size: 0.85rem;
+  color: white;
+  z-index: 2;
 }
 
-/* --- Modal Detail View --- */
+/* --- Favorite Heart Button on Card --- */
+.fav-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: 0.3s;
+  font-size: 1.1rem;
+}
+
+.fav-btn:hover {
+  transform: scale(1.15);
+  background: rgba(0, 0, 0, 0.8);
+  border-color: var(--accent-blue);
+}
+
+.anime-info {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.anime-info h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.status-text {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* --- Anime Modal Detail View --- */
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 2000;
-  padding: 20px;
 }
 
 .modal-card {
   background: var(--card-bg);
-  width: 100%;
+  width: 90%;
   max-width: 1000px;
-  max-height: 90vh;
-  border-radius: 28px;
+  height: 85vh;
+  border-radius: 24px;
   display: flex;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.8);
   animation: modalIn 0.3s ease-out;
 }
 
@@ -211,27 +263,120 @@ body {
   to { transform: scale(1); opacity: 1; }
 }
 
-.modal-left { width: 40%; }
-.modal-left img { width: 100%; height: 100%; object-fit: cover; }
-.modal-right { 
-  width: 60%; 
-  padding: 45px; 
-  overflow-y: auto; 
-  text-align: left; 
+.modal-left {
+  width: 38%;
+  height: 100%;
+}
+
+.modal-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.modal-right {
+  width: 62%;
+  padding: 40px;
+  overflow-y: auto;
   position: relative; 
+  display: flex;
+  flex-direction: column;
+}
+
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+  z-index: 10;
+}
+
+.close-btn:hover {
+  background: var(--danger);
+  transform: rotate(90deg);
+}
+
+.status-tag {
+  color: var(--accent-blue);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+
+.modal-meta {
+  display: flex;
+  gap: 15px;
+  margin: 15px 0;
+  color: var(--text-dim);
+}
+
+.modal-description {
+  color: var(--text-dim);
+  line-height: 1.7;
+  font-size: 1rem;
+  text-align: justify;
+  margin: 15px 0 25px;
+  padding-right: 5px;
+}
+
+/* --- Genre Styling & Click Fixes --- */
+.genre-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
 }
 
 .genre-tag {
-  background: #2d3542;
+  background: rgba(83, 109, 254, 0.15);
+  color: var(--accent-blue);
   padding: 6px 14px;
   border-radius: 20px;
-  font-size: 0.8rem;
-  margin-right: 8px;
-  margin-bottom: 8px;
-  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(83, 109, 254, 0.3);
+  transition: all 0.3s ease;
 }
 
-/* --- Modern Side-by-Side Footer --- */
+.genre-tag.clickable {
+  cursor: pointer;
+}
+
+.genre-tag.clickable:hover {
+  background: var(--accent-blue);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+/* --- Custom Scrollbar for Modal --- */
+.modal-right::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-right::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-right::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+/* --- Footer --- */
 .main-footer {
   background-color: #0b1120;
   padding: 50px 0 20px;
@@ -246,40 +391,18 @@ body {
   margin: 0 auto;
   padding: 0 4%;
   display: flex;
-  justify-content: space-between; /* Pins left and right sides */
+  justify-content: space-between;
   align-items: flex-start;
 }
 
-.footer-left {
-  text-align: left;
-}
-
-.footer-left h2 {
-  font-size: 1.8rem;
-  margin: 0;
-  font-weight: 800;
-}
-
-.footer-left h2 span {
-  color: var(--accent-blue);
-}
-
+.footer-left { text-align: left; }
 .footer-left p {
   color: var(--text-dim);
   margin-top: 8px;
   font-size: 0.95rem;
 }
 
-.footer-right {
-  text-align: right;
-}
-
-.footer-right h3 {
-  margin: 0;
-  font-size: 1.1rem;
-  color: white;
-}
-
+.footer-right { text-align: right; }
 .social-icons {
   display: flex;
   gap: 20px;
@@ -288,20 +411,15 @@ body {
 }
 
 .social-icons a i {
-  font-size: 2rem; /* Size of the Github/LinkedIn icons */
+  font-size: 2rem;
   color: var(--text-dim);
   transition: all 0.3s ease;
 }
 
-/* Hover Effects for Icons */
-.social-icons a:hover .fa-github {
-  color: #ffffff;
-  filter: drop-shadow(0 0 8px #ffffff);
-}
-
-.social-icons a:hover .fa-linkedin {
-  color: #0077b5;
-  filter: drop-shadow(0 0 8px #0077b5);
+.social-icons a:hover i {
+  color: var(--accent-blue);
+  transform: translateY(-3px);
+  filter: drop-shadow(0 0 8px var(--accent-glow));
 }
 
 .footer-bottom {
@@ -317,21 +435,11 @@ body {
 /* --- Responsiveness --- */
 @media (max-width: 1100px) {
   .anime-grid { grid-template-columns: repeat(2, 1fr); }
+  .modal-card { flex-direction: column; height: 95vh; }
+  .modal-left, .modal-right { width: 100%; }
+  .modal-left { height: 40%; }
 }
 
-@media (max-width: 768px) {
-  .nav-content { flex-direction: column; gap: 15px; }
+@media (max-width: 600px) {
   .anime-grid { grid-template-columns: 1fr; }
-  .modal-card { flex-direction: column; }
-  .modal-left { width: 100%; height: 300px; }
-  .modal-right { width: 100%; }
-  
-  .footer-container {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 30px;
-  }
-  .footer-left, .footer-right { text-align: center; }
-  .social-icons { justify-content: center; }
 }

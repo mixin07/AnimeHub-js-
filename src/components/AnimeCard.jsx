@@ -1,49 +1,50 @@
 import React from 'react';
 
-const AnimeCard = ({ anime, toggleFavorite, isFavorite, onCardClick }) => {
+const AnimeCard = ({ anime, isFavorite, toggleFavorite, onCardClick, onGenreClick }) => {
   return (
     <div className="anime-card" onClick={() => onCardClick(anime)}>
       <div className="image-container">
-        <img 
-          src={anime.images.jpg.large_image_url} 
-          alt={anime.title} 
-          loading="lazy" 
-        />
+        <img src={anime.images.jpg.large_image_url} alt={anime.title} />
         
-        {/* Rating Badge at Bottom Left */}
-        <div className="rating-badge">★ {anime.score || 'N/A'}</div>
-        
-        {/* Heart Button at Top Right */}
+        {/* Rating Badge */}
+        {anime.score && (
+          <div className="rating-badge">
+            ⭐ {anime.score}
+          </div>
+        )}
+
+        {/* Favorite Button */}
         <button 
           className="fav-btn" 
           onClick={(e) => {
-            e.stopPropagation(); // Stops the modal from opening when clicking heart
+            e.stopPropagation();
             toggleFavorite(anime);
           }}
-          title={isFavorite ? "Remove from List" : "Add to List"}
         >
           {isFavorite ? '❤️' : '🤍'}
         </button>
       </div>
-      
-      <div style={{ padding: '15px', textAlign: 'left' }}>
-        <h3 style={{ 
-          fontSize: '1rem', 
-          margin: '0 0 5px 0',
-          whiteSpace: 'nowrap', 
-          overflow: 'hidden', 
-          textOverflow: 'ellipsis' 
-        }}>
-          {anime.title}
-        </h3>
-        <span style={{ 
-          fontSize: '0.75rem', 
-          color: 'var(--accent-blue)', 
-          fontWeight: '700',
-          textTransform: 'uppercase'
-        }}>
-          {anime.status}
-        </span>
+
+      <div className="anime-info">
+        <h3>{anime.title}</h3>
+        
+        {/* Genre Tags - Now Clickable */}
+        <div className="genre-container">
+          {anime.genres?.slice(0, 3).map(genre => (
+            <span 
+              key={genre.mal_id} 
+              className="genre-tag clickable"
+              onClick={(e) => {
+                e.stopPropagation(); // Prevents opening the modal
+                onGenreClick(genre.mal_id, genre.name);
+              }}
+            >
+              {genre.name}
+            </span>
+          ))}
+        </div>
+        
+        <p className="status-text">{anime.status}</p>
       </div>
     </div>
   );

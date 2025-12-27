@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AnimeModal = ({ anime, closeModal }) => {
+const AnimeModal = ({ anime, closeModal, onGenreClick }) => {
   if (!anime) return null;
 
   return (
@@ -29,7 +29,14 @@ const AnimeModal = ({ anime, closeModal }) => {
 
           <div className="genre-container">
             {anime.genres?.map(genre => (
-              <span key={genre.mal_id} className="genre-tag">
+              <span 
+                key={genre.mal_id} 
+                className="genre-tag clickable"
+                onClick={() => {
+                  onGenreClick(genre.mal_id, genre.name); // Filter by genre
+                  closeModal(); // Close modal to show results
+                }}
+              >
                 {genre.name}
               </span>
             ))}
