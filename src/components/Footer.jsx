@@ -1,24 +1,31 @@
 import React from 'react';
+import '../index.css';
 
 const Footer = () => {
   return (
-    <footer className="footer">
-      <div className="container footer-content">
-        <div className="logo" style={{fontSize: '1.2rem'}}>
-          Anime<span>Hub</span>
-        </div>
-        
-        <p style={{color: 'var(--text-dim)', fontSize: '0.9rem'}}>
-          &copy; {new Date().getFullYear()} AnimeHub. All rights reserved.
-        </p>
+    <footer className="main-footer">
+      <div className="footer-container">
 
-        <button 
-          className="nav-btn" 
-          onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
-          style={{fontSize: '0.8rem'}}
-        >
-          Top ↑
-        </button>
+        <div className="footer-left">
+          <h2>Anime<span>Hub</span></h2>
+          <p>Your ultimate anime sanctuary.</p>
+        </div>
+
+        <div className="footer-right">
+          <h3>Stay Connected</h3>
+          <div className="social-icons">
+            <a href="https://github.com/mixin07" target="_blank" rel="noreferrer" aria-label="GitHub">
+              <i className="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/j-mirudhula" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+              <i className="fab fa-linkedin"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div className="footer-bottom">
+        <p>&copy; 2025 AnimeHub. Built with ❤️ by Mirudhula. All rights reserved.</p>
       </div>
     </footer>
   );
