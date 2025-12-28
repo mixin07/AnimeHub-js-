@@ -2,6 +2,8 @@
 
 A modern, responsive anime discovery platform built with **React**, **Vite**, and the **Jikan API**. AnimeHub allows users to explore trending series, search for specific titles, filter by genre, and maintain a personalized "My List" using browser local storage.
 
+🚀 **Live Demo:** [https://animehub-js.netlify.app/](https://animehub-js.netlify.app/)
+
 ## ✨ Features
 
 * **Top Trending**: View a curated list of the most popular anime series currently airing.
