@@ -35,7 +35,7 @@ const Header = ({ search, setSearch, view, setView }) => {
             className={`nav-btn ${view === "favorites" ? 'active' : ''}`}
             onClick={() => setView("favorites")}
           >
-            My List
+            My List ❤️
           </button>
         </div>
       </div>

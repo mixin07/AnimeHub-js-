@@ -110,7 +110,7 @@ function App() {
                   ? `Genre: ${genreLabel}` 
                   : "Top Trending"}
               </h1>
-              <p>Explore the most popular series and movies right now.</p>
+              <p>Explore the most popular animes right now.</p>
               {genreLabel && (
                 <button 
                   className="nav-btn" 
