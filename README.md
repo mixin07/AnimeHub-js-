@@ -10,7 +10,7 @@ A modern, responsive anime discovery platform built with **React**, **Vite**, an
 * **Real-time Search**: Find your favorite anime using a high-performance search bar with integrated debouncing.
 * **Interactive Genres**: Click on genre tags to instantly filter the library and discover new content.
 * **My List (Favorites)**: Save must-watch anime to a personal list that persists across sessions via `localStorage`.
-* **Glassmorphism UI**: A sleek, dark-themed interface featuring neon blue accents and modern design principles.
+* **Glassmorphism UI**: A sleek, dark-themed interface featuring neon purple accents and modern design principles.
 * **Detailed Modals**: Access comprehensive information including synopses, scores, and status for every title.
 * **Responsive Design**: Optimized for a seamless experience across desktop, tablet, and mobile devices.
 
@@ -98,4 +98,4 @@ AnimeHub (js)/
 
 ---
 
-Built with ❤️ by Mirudhula
+Built with ❤️ by Mirudhula...
