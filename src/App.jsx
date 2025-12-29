@@ -8,20 +8,23 @@ import Footer from './components/Footer';
 
 function App() {
   const [animeList, setAnimeList] = useState([]);
-  const [favorites, setFavorites] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [view, setView] = useState("home");
   const [selectedAnime, setSelectedAnime] = useState(null);
   const [genreLabel, setGenreLabel] = useState("");
 
-  // Load favorites from local storage on initial mount
-  useEffect(() => {
+  /* FIX: INITIALIZE STATE FROM LOCALSTORAGE IMMEDIATELY
+     This prevents the "empty array overwrite" bug on refresh.
+  */
+  const [favorites, setFavorites] = useState(() => {
     const saved = localStorage.getItem('animehub-favs');
-    if (saved) setFavorites(JSON.parse(saved));
-  }, []);
+    return saved ? JSON.parse(saved) : [];
+  });
 
-  // Save favorites to local storage whenever they change
+  /* SAVE TO LOCAL STORAGE
+     This runs every time the 'favorites' array changes.
+  */
   useEffect(() => {
     localStorage.setItem('animehub-favs', JSON.stringify(favorites));
   }, [favorites]);
@@ -67,7 +70,7 @@ function App() {
       setView("home");     
       fetchData("");       
     } else {
-      setView(targetView); // Sets view to "favorites"
+      setView(targetView); 
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
